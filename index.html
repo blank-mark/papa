@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>С Днём Рождения, папа Анатолий!</title>
+  <style>
+    :root {
+      --bg1: #08121f;
+      --bg2: #13263f;
+      --bg3: #214c6b;
+      --card: rgba(255, 255, 255, 0.09);
+      --card-border: rgba(255, 255, 255, 0.18);
+      --text: #f6f9ff;
+      --muted: rgba(246, 249, 255, 0.82);
+      --accent: #ffd54a;
+      --accent2: #65d6ff;
+      --good: #6dff9f;
+      --shadow: 0 18px 55px rgba(0, 0, 0, 0.35);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top, rgba(109,214,255,0.14), transparent 30%),
+        radial-gradient(circle at 20% 20%, rgba(255,213,74,0.12), transparent 25%),
+        linear-gradient(135deg, var(--bg1), var(--bg2) 45%, var(--bg3));
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .wrap {
+      width: min(1100px, calc(100% - 24px));
+      margin: 0 auto;
+      padding: 18px 0 40px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 34px 10px 18px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.18);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+      font-size: clamp(14px, 2.1vw, 16px);
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(34px, 6vw, 64px);
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+      text-shadow: 0 0 24px rgba(255,255,255,0.18);
+      animation: glow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 12px rgba(255,255,255,0.18); }
+      to { text-shadow: 0 0 28px rgba(255,213,74,0.35); }
+    }
+
+    .subtitle {
+      margin-top: 12px;
+      font-size: clamp(17px, 2.5vw, 22px);
+      color: var(--muted);
+    }
+
+    .big-title {
+      margin-top: 12px;
+      font-weight: 800;
+      font-size: clamp(24px, 4.2vw, 42px);
+      color: var(--accent);
+      text-shadow: 0 0 20px rgba(255, 213, 74, 0.3);
+      animation: pulse 2.2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+      padding: 22px;
+      transition: transform .25s ease, box-shadow .25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 22px 65px rgba(0,0,0,0.42);
+    }
+
+    .card h2 {
+      margin: 0 0 14px;
+      font-size: clamp(22px, 3vw, 30px);
+    }
+
+    .card p {
+      margin: 10px 0;
+      font-size: clamp(16px, 2.15vw, 19px);
+      line-height: 1.65;
+      color: var(--text);
+    }
+
+    .icons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      font-size: clamp(28px, 5vw, 42px);
+      margin: 12px 0 8px;
+      animation: drift 4s ease-in-out infinite;
+    }
+
+    @keyframes drift {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 16px;
+      padding: 14px 14px;
+      font-size: 16px;
+      font-weight: 700;
+      color: #06111e;
+      background: linear-gradient(135deg, var(--accent), #fff1a8);
+      cursor: pointer;
+      box-shadow: 0 10px 28px rgba(255, 213, 74, 0.18);
+      transition: transform .2s ease, filter .2s ease;
+      min-height: 52px;
+    }
+
+    .btn:hover { transform: translateY(-2px) scale(1.01); filter: brightness(1.02); }
+    .btn.secondary {
+      background: linear-gradient(135deg, #6de0ff, #d4f7ff);
+    }
+    .btn.ghost {
+      background: rgba(255,255,255,0.14);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+    .btn.good {
+      background: linear-gradient(135deg, #7dff9d, #defbe6);
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 12px;
+    }
+
+    .chip {
+      padding: 14px 14px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.16);
+      font-size: 15px;
+      line-height: 1.35;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .photo {
+      border-radius: 18px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.16);
+      aspect-ratio: 1 / 1;
+      position: relative;
+    }
+
+    .photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transform: scale(1.01);
+      transition: transform .3s ease;
+    }
+
+    .photo:hover img { transform: scale(1.08); }
+
+    .photo .label {
+      position: absolute;
+      left: 10px;
+      bottom: 10px;
+      padding: 6px 10px;
+      background: rgba(0,0,0,0.40);
+      border-radius: 999px;
+      font-size: 12px;
+      backdrop-filter: blur(8px);
+    }
+
+    .music-box,
+    .secret-box,
+    .game-box {
+      display: grid;
+      gap: 12px;
+    }
+
+    .field {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.08);
+      color: var(--text);
+      border-radius: 14px;
+      padding: 14px 14px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .field::placeholder { color: rgba(255,255,255,0.56); }
+
+    .status {
+      min-height: 24px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .status.good-text { color: #bfffd1; }
+    .status.bad-text { color: #ffd1d1; }
+
+    .game-stage {
+      display: grid;
+      gap: 12px;
+    }
+
+    .car {
+      position: relative;
+      margin: 6px auto 0;
+      width: min(100%, 520px);
+      aspect-ratio: 16 / 9;
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at 50% 20%, rgba(109,214,255,0.12), transparent 28%),
+        linear-gradient(180deg, rgba(255,255,255,0.09), rgba(255,255,255,0.04));
+      border: 1px solid rgba(255,255,255,0.16);
+      overflow: hidden;
+    }
+
+    .road {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 34%;
+      background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,0.25));
+    }
+
+    .car-body {
+      position: absolute;
+      left: 11%;
+      right: 11%;
+      bottom: 28%;
+      height: 30%;
+      border-radius: 24px 24px 18px 18px;
+      background: linear-gradient(135deg, #e85b4d, #b91f2a);
+      box-shadow: 0 14px 28px rgba(0,0,0,0.28);
+    }
+
+    .car-roof {
+      position: absolute;
+      left: 29%;
+      right: 29%;
+      bottom: 47%;
+      height: 18%;
+      border-radius: 24px 24px 0 0;
+      background: linear-gradient(135deg, #ff7a6b, #d12635);
+    }
+
+    .window {
+      position: absolute;
+      bottom: 50%;
+      height: 12%;
+      border-radius: 10px;
+      background: linear-gradient(180deg, #91dfff, #dff9ff);
+      border: 2px solid rgba(255,255,255,0.26);
+    }
+
+    .window.left { left: 32%; width: 14%; }
+    .window.right { right: 32%; width: 14%; }
+
+    .wheel {
+      position: absolute;
+      bottom: 16%;
+      width: 16%;
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      background: #10141a;
+      border: 6px solid #6b7280;
+      box-shadow: inset 0 0 0 8px #141922;
+    }
+
+    .wheel::after {
+      content: "";
+      position: absolute;
+      inset: 34%;
+      border-radius: 50%;
+      background: #cbd5e1;
+    }
+
+    .wheel.left { left: 18%; }
+    .wheel.right { right: 18%; }
+
+    .missing-part {
+      position: absolute;
+      width: 84px;
+      height: 84px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 34px;
+      user-select: none;
+      cursor: grab;
+      box-shadow: 0 16px 24px rgba(0,0,0,0.22);
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.18);
+      backdrop-filter: blur(10px);
+    }
+
+    .parts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+      gap: 10px;
+    }
+
+    .part {
+      padding: 14px 12px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.09);
+      border: 1px solid rgba(255,255,255,0.16);
+      text-align: center;
+      cursor: grab;
+      user-select: none;
+      transition: transform .2s ease, background .2s ease;
+      font-size: 30px;
+    }
+
+    .part:hover { transform: translateY(-2px); background: rgba(255,255,255,0.13); }
+    .part.dragging { opacity: 0.5; }
+
+    .dropzone {
+      position: absolute;
+      border: 2px dashed rgba(255,255,255,0.35);
+      border-radius: 16px;
+      background: rgba(255,255,255,0.06);
+    }
+
+    .dropzone.active {
+      border-color: var(--good);
+      background: rgba(109,255,159,0.10);
+    }
+
+    .drop-tip {
+      text-align: center;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .footer {
+      text-align: center;
+      color: rgba(246,249,255,0.70);
+      padding: 18px 10px 8px;
+      font-size: 14px;
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .confetti,
+    .spark {
+      position: absolute;
+      top: -18px;
+      border-radius: 6px;
+      opacity: 0.95;
+    }
+
+    .confetti {
+      width: 10px;
+      height: 16px;
+      animation: fall linear forwards;
+    }
+
+    .spark {
+      width: 7px;
+      height: 7px;
+      animation: explode 1200ms ease-out forwards;
+      border-radius: 50%;
+    }
+
+    @keyframes fall {
+      to { transform: translateY(110vh) rotate(360deg); }
+    }
+
+    @keyframes explode {
+      0% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(22); opacity: 0; }
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%) translateY(20px);
+      background: rgba(6,17,30,0.88);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 999px;
+      padding: 12px 16px;
+      font-size: 14px;
+      opacity: 0;
+      transition: opacity .25s ease, transform .25s ease;
+      z-index: 20;
+      box-shadow: var(--shadow);
+      max-width: min(94vw, 560px);
+      text-align: center;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .hidden { display: none !important; }
+
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: 1fr; }
+      .gallery { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .wrap { width: min(100% - 16px, 1100px); }
+      .hero { padding-top: 22px; }
+      .card { padding: 18px; border-radius: 20px; }
+      .actions { grid-template-columns: 1fr; }
+      .features { grid-template-columns: 1fr 1fr; }
+      .parts { grid-template-columns: 1fr 1fr; }
+      .car { border-radius: 18px; }
+      .missing-part { width: 70px; height: 70px; font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay" id="overlay"></div>
+  <div class="toast" id="toast">Привет, папа Анатолий! 🎉</div>
+
+  <audio id="bgm" src="music.mp3" preload="auto" loop></audio>
+
+  <div class="wrap">
+    <section class="hero">
+      <div class="badge">🎂 Праздничная страница для папы Анатолия</div>
+      <h1>С Днём Рождения, Папа!</h1>
+      <div class="subtitle">Самому сильному, доброму и надёжному папе</div>
+      <div class="big-title">🏆 Лучший папа в мире 🏆</div>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Тёплое поздравление</h2>
+        <div class="icons">🔧 🛠️ 🔦 🔪 🚗 ⚙️ ❤️</div>
+        <p>Папа, с Днём Рождения! Ты лучший папа на свете, и это не просто красивые слова, а чистая правда.</p>
+        <p>Ты всегда рядом, поддерживаешь, заботишься, помогаешь и делаешь всё, чтобы мне было хорошо. С тобой спокойно, надёжно и очень по-настоящему. Это редкий суперскилл, честно говоря.</p>
+        <p>Ты очень рукастый: можешь починить машину, разобраться в технике, что-то собрать, подкрутить, исправить и довести до ума. Когда что-то ломается — у тебя почти всегда есть план, инструмент и спокойствие. Магия, а не папа.</p>
+        <p>Ещё у тебя всегда есть крутые вещи: ножи, фонарики, инструменты — всё нужное, всё полезное, всё по делу. И вообще ты умеешь быть сильным, умным и очень классным одновременно.</p>
+        <p>Спасибо тебе за любовь, за заботу, за покупки, за помощь и за то, что ты у меня есть. Я очень тебя люблю и очень ценю.</p>
+        <div class="actions">
+          <button class="btn" id="btnFire">Запустить салют</button>
+          <button class="btn secondary" id="btnMusic">Включить музыку</button>
+          <button class="btn ghost" id="btnConfetti">Ещё конфетти</button>
+          <button class="btn good" id="btnSuper">Супер-поздравление</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Почему папа — топ</h2>
+        <div class="features">
+          <div class="chip">🔧 Умеет чинить почти всё</div>
+          <div class="chip">🚗 Разбирается в машинах</div>
+          <div class="chip">🔦 Любит полезные штуки</div>
+          <div class="chip">🛠️ Настоящий мастер</div>
+          <div class="chip">💪 Сильный и надёжный</div>
+          <div class="chip">❤️ Добрый и заботливый</div>
+          <div class="chip">🏆 Личный чемпион семьи</div>
+          <div class="chip">😎 Просто очень крутой</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Фотографии папы</h2>
+      <p>Тут будут твои настоящие фото из папки <b>images</b>. Я сделал поддержку файлов <b>photo1</b>, <b>photo2</b>, <b>photo3</b> — с подстановкой форматов <b>.jpg</b>, <b>.png</b> и <b>.webp</b>.</p>
+      <div class="gallery">
+        <div class="photo"><img id="img1" alt="Фото папы 1"><div class="label">Фото 1</div></div>
+        <div class="photo"><img id="img2" alt="Фото папы 2"><div class="label">Фото 2</div></div>
+        <div class="photo"><img id="img3" alt="Фото папы 3"><div class="label">Фото 3</div></div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="card secret-box">
+        <h2>Секретный код</h2>
+        <p>Напиши слово <b>папа</b> — и откроется большой салют. Можно попробовать ещё раз, если захочется устроить второй раунд праздника.</p>
+        <input class="field" id="secretInput" placeholder="Введи секретный код..." autocomplete="off" />
+        <div class="status" id="secretStatus">Подсказка: код из четырёх букв.</div>
+      </div>
+
+      <div class="card music-box">
+        <h2>Музыка</h2>
+        <p>Автозапуск музыки в браузере иногда блокируется, поэтому здесь есть кнопка. Но я всё равно попробовал стартовать её сразу после первого действия на странице.</p>
+        <div class="actions">
+          <button class="btn secondary" id="btnPlay">▶ Включить музыку</button>
+          <button class="btn ghost" id="btnPause">⏸ Пауза</button>
+        </div>
+        <div class="status" id="musicStatus">Музыка готова. Файл должен называться <b>music.mp3</b> и лежать рядом с HTML.</div>
+      </div>
+    </section>
+
+    <section class="card game-box">
+      <h2>Мини-игра: почини машину папы</h2>
+      <p>Перетащи детали на машину. Когда всё окажется на месте, папина машина снова будет как новая.</p>
+      <div class="game-stage">
+        <div class="car" id="car">
+          <div class="road"></div>
+          <div class="car-body"></div>
+          <div class="car-roof"></div>
+          <div class="window left"></div>
+          <div class="window right"></div>
+          <div class="wheel left"></div>
+          <div class="wheel right"></div>
+          <div class="dropzone" data-part="wheel-left" style="left: 14%; bottom: 12%; width: 18%; height: 26%;"></div>
+          <div class="dropzone" data-part="wheel-right" style="right: 14%; bottom: 12%; width: 18%; height: 26%;"></div>
+          <div class="dropzone" data-part="window-left" style="left: 30%; bottom: 46%; width: 16%; height: 15%;"></div>
+          <div class="dropzone" data-part="window-right" style="right: 30%; bottom: 46%; width: 16%; height: 15%;"></div>
+          <div class="dropzone" data-part="hood" style="left: 28%; bottom: 28%; width: 20%; height: 18%;"></div>
+        </div>
+        <div class="parts" id="parts">
+          <div class="part" draggable="true" data-part="wheel-left">🛞</div>
+          <div class="part" draggable="true" data-part="wheel-right">🛞</div>
+          <div class="part" draggable="true" data-part="window-left">🪟</div>
+          <div class="part" draggable="true" data-part="window-right">🪟</div>
+          <div class="part" draggable="true" data-part="hood">🔧</div>
+        </div>
+        <div class="drop-tip" id="gameTip">Подсказка: перетаскивай значки на соответствующие места.</div>
+        <div class="actions">
+          <button class="btn good" id="btnResetGame">Сбросить игру</button>
+          <button class="btn" id="btnWinGame">Почти готово!</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">Сделано с любовью ❤️</div>
+  </div>
+
+  <script>
+    const overlay = document.getElementById('overlay');
+    const toast = document.getElementById('toast');
+    const bgm = document.getElementById('bgm');
+    const secretInput = document.getElementById('secretInput');
+    const secretStatus = document.getElementById('secretStatus');
+    const musicStatus = document.getElementById('musicStatus');
+    const gameTip = document.getElementById('gameTip');
+
+    const imageSets = [
+      ['images/photo1.jpg', 'images/photo1.png', 'images/photo1.webp'],
+      ['images/photo2.jpg', 'images/photo2.png', 'images/photo2.webp'],
+      ['images/photo3.jpg', 'images/photo3.png', 'images/photo3.webp']
+    ];
+
+    function setImageWithFallback(imgId, paths) {
+      const img = document.getElementById(imgId);
+      let i = 0;
+      const tryNext = () => {
+        if (i >= paths.length) {
+          img.alt = 'Не найдено: ' + paths[0];
+          img.src = 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(`
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800">
+              <defs>
+                <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#1d3557"/>
+                  <stop offset="100%" stop-color="#457b9d"/>
+                </linearGradient>
+              </defs>
+              <rect width="800" height="800" fill="url(#g)"/>
+              <text x="50%" y="45%" text-anchor="middle" font-size="42" fill="#fff" font-family="Arial">Фото папы</text>
+              <text x="50%" y="55%" text-anchor="middle" font-size="24" fill="#fff" opacity="0.85" font-family="Arial">Положи photo1/photo2/photo3 в папку images</text>
+            </svg>
+          `);
+          return;
+        }
+        img.onerror = () => { i += 1; tryNext(); };
+        img.src = paths[i];
+      };
+      tryNext();
+    }
+
+    imageSets.forEach((paths, idx) => setImageWithFallback(`img${idx+1}`, paths));
+
+    function showToast(message, ms = 2400) {
+      toast.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(() => toast.classList.remove('show'), ms);
+    }
+
+    function burst(x = window.innerWidth * 0.5, y = window.innerHeight * 0.35, count = 28) {
+      for (let i = 0; i < count; i++) {
+        const s = document.createElement('div');
+        s.className = 'spark';
+        s.style.left = `${x}px`;
+        s.style.top = `${y}px`;
+        s.style.background = `hsl(${Math.floor(Math.random() * 360)}, 90%, 65%)`;
+        const dx = (Math.random() - 0.5) * 300;
+        const dy = (Math.random() - 0.5) * 220;
+        s.style.transform = `translate(${dx}px, ${dy}px)`;
+        overlay.appendChild(s);
+        setTimeout(() => s.remove(), 1300);
+      }
+    }
+
+    function confetti(amount = 70) {
+      for (let i = 0; i < amount; i++) {
+        const c = document.createElement('div');
+        c.className = 'confetti';
+        c.style.left = Math.random() * 100 + 'vw';
+        c.style.background = `hsl(${Math.floor(Math.random() * 360)}, 95%, 65%)`;
+        c.style.width = (6 + Math.random() * 8) + 'px';
+        c.style.height = (10 + Math.random() * 16) + 'px';
+        c.style.animationDuration = (3 + Math.random() * 4) + 's';
+        c.style.transform = `rotate(${Math.random() * 360}deg)`;
+        overlay.appendChild(c);
+        setTimeout(() => c.remove(), 7600);
+      }
+    }
+
+    function superCelebration() {
+      confetti(120);
+      burst(window.innerWidth * 0.5, window.innerHeight * 0.28, 45);
+      burst(window.innerWidth * 0.33, window.innerHeight * 0.38, 32);
+      burst(window.innerWidth * 0.68, window.innerHeight * 0.40, 32);
+      showToast('С Днём Рождения,Папа', 3200);
+    }
+
+    async function startMusic() {
+      try {
+        bgm.volume = 0.7;
+        await bgm.play();
+        musicStatus.textContent = 'Музыка играет. Можно поставить паузу или включить снова.';
+        musicStatus.className = 'status good-text';
+      } catch (e) {
+        musicStatus.textContent = 'Браузер не дал включить музыку автоматически. Нажми кнопку ещё раз.';
+        musicStatus.className = 'status bad-text';
+      }
+    }
+
+    document.getElementById('btnFire').addEventListener('click', () => {
+      burst(window.innerWidth * 0.5, window.innerHeight * 0.26, 40);
+      burst(window.innerWidth * 0.22, window.innerHeight * 0.34, 24);
+      burst(window.innerWidth * 0.78, window.innerHeight * 0.34, 24);
+      showToast('Большой салют для папы! 🎆', 2500);
+    });
+
+    document.getElementById('btnMusic').addEventListener('click', startMusic);
+    document.getElementById('btnPlay').addEventListener('click', startMusic);
+    document.getElementById('btnPause').addEventListener('click', () => {
+      bgm.pause();
+      musicStatus.textContent = 'Музыка поставлена на паузу.';
+      musicStatus.className = 'status';
+      showToast('Музыка на паузе ⏸', 1800);
+    });
+    document.getElementById('btnConfetti').addEventListener('click', () => {
+      confetti(90);
+      showToast('Ещё немного праздника ✨', 1800);
+    });
+    document.getElementById('btnSuper').addEventListener('click', superCelebration);
+
+    document.getElementById('btnWinGame').addEventListener('click', () => {
+      superCelebration();
+      gameTip.textContent = 'Почти как новый! Осталось только добить салютом и улыбкой.';
+    });
+
+    document.getElementById('btnResetGame').addEventListener('click', resetGame);
+
+    secretInput.addEventListener('input', () => {
+      const value = secretInput.value.trim().toLowerCase();
+      if (value === 'папа') {
+        secretStatus.textContent = 'Код верный! Большой салют открыт!';
+        secretStatus.className = 'status good-text';
+        superCelebration();
+      } else if (value.length >= 4) {
+        secretStatus.textContent = 'Пока не тот код. Подсказка: это слово «папа».';
+        secretStatus.className = 'status bad-text';
+      } else {
+        secretStatus.textContent = 'Подсказка: код из четырёх букв.';
+        secretStatus.className = 'status';
+      }
+    });
+
+    // Авто-подсказка и попытка старта музыки после первого жеста
+    let triedAutoPlay = false;
+    const tryAutoPlayOnce = () => {
+      if (triedAutoPlay) return;
+      triedAutoPlay = true;
+      startMusic();
+    };
+    window.addEventListener('pointerdown', tryAutoPlayOnce, { once: true });
+    window.addEventListener('keydown', tryAutoPlayOnce, { once: true });
+
+    // мини-игра drag & drop
+    const parts = document.querySelectorAll('.part');
+    const dropzones = document.querySelectorAll('.dropzone');
+    let placed = new Set();
+
+    function resetGame() {
+      placed = new Set();
+      parts.forEach(p => {
+        p.classList.remove('hidden', 'dragging');
+        p.draggable = true;
+      });
+      dropzones.forEach(z => z.classList.remove('active'));
+      gameTip.textContent = 'Подсказка: перетаскивай значки на соответствующие места.';
+      showToast('Игра сброшена', 1400);
+    }
+
+    parts.forEach(part => {
+      part.addEventListener('dragstart', (e) => {
+        e.dataTransfer.setData('text/plain', part.dataset.part);
+        part.classList.add('dragging');
+      });
+      part.addEventListener('dragend', () => part.classList.remove('dragging'));
+      part.addEventListener('click', () => {
+        const target = [...dropzones].find(z => z.dataset.part === part.dataset.part && !z.classList.contains('active'));
+        if (target) {
+          target.classList.add('active');
+          placed.add(part.dataset.part);
+          part.classList.add('hidden');
+          checkWin();
+        }
+      });
+    });
+
+    dropzones.forEach(zone => {
+      zone.addEventListener('dragover', e => e.preventDefault());
+      zone.addEventListener('dragenter', () => zone.classList.add('active'));
+      zone.addEventListener('dragleave', () => zone.classList.remove('active'));
+      zone.addEventListener('drop', e => {
+        e.preventDefault();
+        const partName = e.dataTransfer.getData('text/plain');
+        if (partName === zone.dataset.part && !zone.classList.contains('active')) {
+          zone.classList.add('active');
+        }
+        if (partName === zone.dataset.part) {
+          placed.add(partName);
+          const el = [...parts].find(p => p.dataset.part === partName);
+          if (el) el.classList.add('hidden');
+          zone.classList.add('active');
+          gameTip.textContent = 'Отлично! Деталь на месте.';
+          checkWin();
+        } else {
+          gameTip.textContent = 'Не та деталь. Попробуй другую.';
+        }
+      });
+    });
+
+    function checkWin() {
+      if (placed.size === 5) {
+        gameTip.textContent = 'Машина починена! Папа бы сказал: «Ну вот, другое дело!»';
+        superCelebration();
+        showToast('Фольсваген поло 🚗', 2600);
+      }
+    }
+
+    // стартовые эффекты
+    confetti(55);
+    setTimeout(() => burst(window.innerWidth * 0.5, window.innerHeight * 0.22, 34), 600);
+  </script>
+</body>
+</html>
